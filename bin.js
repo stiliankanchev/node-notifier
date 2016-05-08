@@ -24,23 +24,7 @@ readme(aliases);
 var passedOptions = getOptionsIfExists(Object.keys(aliases), argv);
 var stdinMessage = '';
 
-process.stdin.on('readable', function(){
-  var chunk = this.read();
-  if (!chunk && !stdinMessage) {
-    doNotification(passedOptions);
-    this.end();
-    return;
-  }
-  if (!chunk) return;
-  stdinMessage += chunk.toString();
-});
-
-process.stdin.on('end', function(){
-  if (stdinMessage) {
-    passedOptions.message = stdinMessage;
-  }
-  doNotification(passedOptions);
-});
+doNotification(passedOptions);
 
 function doNotification (options) {
 
